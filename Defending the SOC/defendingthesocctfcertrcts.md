@@ -1,8 +1,7 @@
 ## Written by duartemcg
 # A simple challenge
 Trata-se de uma string que foi varias vezes codificada com base64, apenas necessitamos de fazer a sua decoficação online
-
-<br><br>
+<br>
 
 # Welcome to Lisbon!
 Examinei a foto no forensically e pudi perceber mais ou menos a fotografia que estava a procura, reparei tambem que estava algo escrito em Portugues e por isso tinha o algoritmo do google a meu favor assim que pesquisa-se por "Victoria Secret".
@@ -24,11 +23,9 @@ Este exercicio trata-se novamente de usar o forensically, e ao olhar para a stri
 
 # Roman Encryption 
 Devemos tar a falar da cifra de caesar ou uma evolucao sua a keyed caesar cipher, mas normalmente indicamos o numero de transcrição de letra na cifra de caesar por isso diria que apenas poderá ser a segunda "versão".
-Após uma pesquisa online consegui encontrar um bom decoder (3) e tentei a keyword "Julius" visto que seria o possível keyword usado na cifra. Sem change acabei por tentar o Auto Solve do mesmo website ao qual obtive a seguinte várias possibildiades onde a chave "gxiusjwcerbdmhkafopqtvlnyz" é a que apresentava melhor score. Após utilizar a mesma consegui chegar a flag "
+Após uma pesquisa online consegui encontrar um bom decoder (3) e tentei a keyword "Julius" visto que seria o possível keyword usado na cifra. Sem change acabei por tentar o Auto Solve do mesmo website ao qual obtive a seguinte várias possibildiades onde a chave "gxiusjwcerbdmhkafopqtvlnyz" é a que apresentava melhor score. 
 
 (3)https://www.boxentriq.com/code-breaking/keyed-caesar-cipher
-Visto que nos dizem que Julius é a 
-
 <br><br>
 
 # Hextraordinary security:
@@ -164,8 +161,9 @@ E ao inserir este valor no URL (?magic=O:5:"Magic":1:{s:3:"key";b:1;}) obti a fl
 # Something Suspicious
 Ao sacar os dois log files tentei fazer o tipico grep "flag" e apos nao retornar nada tentei então simplesmente ler os logs.
 Ao olhar para o log do ftp, ve-se vários logins, excepto que um deles está cifrado em base64 (ZmxhZ3tzMG0zdGgxbmc=), que corresponde a metade da flag ("flag{s0m3th1ng"). Como o log do ssh é um bocado maior decidi aplicar grep a tipicas keywords (password, user) e após aplicar user, reparo numa string codificada com o valor cifrado (X3N1c3AxYzEwdXN9):
-└─$ cat ssh.log\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6Mjl9.YRLFNQ.K6H3kyS7yBUHriMpFpI_5GO5wUs | grep "user"     
-                              
+└─``$ cat ssh.log\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6Mjl9.YRLFNQ.K6H3kyS7yBUHriMpFpI_5GO5wUs | grep "user"``
+
+``                    
 Jun 25 00:29:58 lockedout auth.info sshd[2875]: Connection closed by authenticating user root 192.128.1.23 port 53496 [preauth]
 Jun 25 00:32:43 lockedout auth.info sshd[2897]: Disconnected from authenticating user root 192.128.1.23 port 53498 [preauth]
 Jun 25 00:32:44 lockedout auth.info sshd[2899]: Disconnecting authenticating user root 192.128.1.23 port 53500: Too many authentication failures [preauth]
@@ -189,7 +187,7 @@ Jun 25 00:57:50 lockedout auth.info sshd[2215]: Connection closed by authenticat
 Jun 25 00:57:54 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52528 [preauth]
 Jun 25 00:57:31 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52530 [preauth]
 Jun 25 00:57:34 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52532 [preauth]
-
+``
 Descodificando o valor temos a flag: flag{s0m3th1ng_susp1c10us}
 
 # Decrypting the payload:
