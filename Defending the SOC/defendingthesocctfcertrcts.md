@@ -30,7 +30,7 @@ Após uma pesquisa online consegui encontrar um bom decoder (3) e tentei a keywo
 
 # Hextraordinary security:
 Ao sacar o ficheiro podemos observar o que possivelmente é um hexaDump. Seguindo este raciocinio, podemos ver a sua conversão para ASCII e fazer grep "flag" para ver se encontramos alguma coisa.
-cat garbage\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6NX0.YRKSag.mcJ2BhL6_7k9Tg5l7dir4-VzscU | xxd -r -p | grep "flag"
+``cat garbage\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6NX0.YRKSag.mcJ2BhL6_7k9Tg5l7dir4-VzscU | xxd -r -p | grep "flag"``
 
 xxd:
 -r tells it to convert hex to ascii as opposed to its normal mode of doing the opposite
@@ -96,7 +96,7 @@ Ao sacar a imagem e tentar novamente o que fiz no anterior não consigo obter a 
 :About us:
 Sendo que se trata de um ficheiro pdf a primeira ideia a cabeça foi de correr uma busca de strings com a palavra flag:
 
-$ strings RCTSCERT-FCCN.pdf\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6OH0.YRK9mQ.lbC0MjuDLUT38rFuRydGEMp6xYg | grep "flag"
+``$ strings RCTSCERT-FCCN.pdf\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6OH0.YRK9mQ.lbC0MjuDLUT38rFuRydGEMp6xYg | grep "flag"``
 └─<pdfx:Flag>flag{4b0ut_us_4t_rcts_c3rt}</pdfx:Flag>
   
 <br><br>
@@ -162,8 +162,7 @@ E ao inserir este valor no URL (?magic=O:5:"Magic":1:{s:3:"key";b:1;}) obti a fl
 Ao sacar os dois log files tentei fazer o tipico grep "flag" e apos nao retornar nada tentei então simplesmente ler os logs.
 Ao olhar para o log do ftp, ve-se vários logins, excepto que um deles está cifrado em base64 (ZmxhZ3tzMG0zdGgxbmc=), que corresponde a metade da flag ("flag{s0m3th1ng"). Como o log do ssh é um bocado maior decidi aplicar grep a tipicas keywords (password, user) e após aplicar user, reparo numa string codificada com o valor cifrado (X3N1c3AxYzEwdXN9):
 └─``$ cat ssh.log\?token=eyJ1c2VyX2lkIjoyODYsInRlYW1faWQiOjEzMywiZmlsZV9pZCI6Mjl9.YRLFNQ.K6H3kyS7yBUHriMpFpI_5GO5wUs | grep "user"``
-
-``                    
+             
 Jun 25 00:29:58 lockedout auth.info sshd[2875]: Connection closed by authenticating user root 192.128.1.23 port 53496 [preauth]
 Jun 25 00:32:43 lockedout auth.info sshd[2897]: Disconnected from authenticating user root 192.128.1.23 port 53498 [preauth]
 Jun 25 00:32:44 lockedout auth.info sshd[2899]: Disconnecting authenticating user root 192.128.1.23 port 53500: Too many authentication failures [preauth]
@@ -187,7 +186,7 @@ Jun 25 00:57:50 lockedout auth.info sshd[2215]: Connection closed by authenticat
 Jun 25 00:57:54 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52528 [preauth]
 Jun 25 00:57:31 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52530 [preauth]
 Jun 25 00:57:34 lockedout auth.info sshd[2215]: Connection closed by authenticating user root 192.168.1.23 port 52532 [preauth]
-``
+
 Descodificando o valor temos a flag: flag{s0m3th1ng_susp1c10us}
 
 # Decrypting the payload:
